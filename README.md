@@ -1,4 +1,4 @@
-# Portfolio - Abdelhakim
+# Portfolio - Abdelhakim MENINA
 
 Portfolio moderne développé avec React, TypeScript, Vite et TailwindCSS.
 
