@@ -252,7 +252,7 @@ Ce projet est libre d'utilisation. N'hésitez pas à le forker et le personnalis
 
 ## 👨‍💻 Auteur
 
-Abdelhakim - Développeur Full Stack / DevOps / IA
+Abdelhakim MENINA - Développeur Full Stack / DevOps / IA
 
 ---
 
