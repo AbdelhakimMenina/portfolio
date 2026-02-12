@@ -3,6 +3,7 @@ import type { ContactFormData } from '../../types';
 import Button from '../ui/Button';
 import SectionWrapper from '../ui/SectionWrapper';
 import { useLanguage } from '../../contexts/LanguageContext';
+import emailjs from '@emailjs/browser';
 
 interface FormErrors {
   name?: string;
@@ -90,12 +91,34 @@ const Contact: React.FC = () => {
     setSubmitStatus('idle');
 
     try {
-      // Simulation d'envoi (remplacer par un vrai appel API plus tard)
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Vérifier que les variables d'environnement sont configurées
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error('EmailJS configuration is missing. Please check your environment variables.');
+      }
+
+      // Préparer les paramètres du template EmailJS (réception sur meninaabdelhakim@gmail.com)
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        to_name: 'Abdelhakim MENINA',
+        to_email: 'meninaabdelhakim@gmail.com',
+      };
+
+      // Envoyer l'email via EmailJS
+      await emailjs.send(
+        serviceId,
+        templateId,
+        templateParams,
+        publicKey
+      );
       
       // Succès
       setSubmitStatus('success');
-      console.log('Données du formulaire:', formData);
       
       // Réinitialiser le formulaire après 3 secondes
       setTimeout(() => {
