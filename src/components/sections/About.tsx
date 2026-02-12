@@ -28,39 +28,6 @@ const About: React.FC = () => {
             </p>
           </div>
 
-          {/* Stack principale */}
-          <div className="mt-12">
-            <h3 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
-              {t('about.stackTitle')}
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <div className="flex items-start space-x-3 text-gray-700 dark:text-gray-300">
-                <span className="text-primary-600 dark:text-primary-400 font-bold flex-shrink-0 mt-1">▹</span>
-                <span className="text-sm sm:text-base break-words">{t('about.stack1')}</span>
-              </div>
-              <div className="flex items-start space-x-3 text-gray-700 dark:text-gray-300">
-                <span className="text-primary-600 dark:text-primary-400 font-bold flex-shrink-0 mt-1">▹</span>
-                <span className="text-sm sm:text-base break-words">{t('about.stack2')}</span>
-              </div>
-              <div className="flex items-start space-x-3 text-gray-700 dark:text-gray-300">
-                <span className="text-primary-600 dark:text-primary-400 font-bold flex-shrink-0 mt-1">▹</span>
-                <span className="text-sm sm:text-base break-words">{t('about.stack3')}</span>
-              </div>
-              <div className="flex items-start space-x-3 text-gray-700 dark:text-gray-300">
-                <span className="text-primary-600 dark:text-primary-400 font-bold flex-shrink-0 mt-1">▹</span>
-                <span className="text-sm sm:text-base break-words">{t('about.stack4')}</span>
-              </div>
-              <div className="flex items-start space-x-3 text-gray-700 dark:text-gray-300">
-                <span className="text-primary-600 dark:text-primary-400 font-bold flex-shrink-0 mt-1">▹</span>
-                <span className="text-sm sm:text-base break-words">{t('about.stack5')}</span>
-              </div>
-              <div className="flex items-start space-x-3 text-gray-700 dark:text-gray-300">
-                <span className="text-primary-600 dark:text-primary-400 font-bold flex-shrink-0 mt-1">▹</span>
-                <span className="text-sm sm:text-base break-words">{t('about.stack6')}</span>
-              </div>
-            </div>
-          </div>
-
           {/* Domaines d'expertise */}
           <div className="mt-12">
             <h3 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
