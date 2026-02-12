@@ -1,4 +1,5 @@
 import React from 'react';
+import { LanguageProvider } from './contexts/LanguageContext';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import ScrollProgress from './components/ui/ScrollProgress';
@@ -10,26 +11,26 @@ import Skills from './components/sections/Skills';
 import SoftSkills from './components/sections/SoftSkills';
 import Education from './components/sections/Education';
 import Contact from './components/sections/Contact';
-import Stats from './components/sections/Stats';
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col">
-      <ScrollProgress />
-      <Header />
-      <main className="flex-grow">
-        <Hero />
-        <About />
-        <Experience />
-        <Stats />
-        <Projects />
-        <Skills />
-        <SoftSkills />
-        <Education />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <LanguageProvider>
+      <div className="min-h-screen flex flex-col">
+        <ScrollProgress />
+        <Header />
+        <main className="flex-grow">
+          <Hero />
+          <About />
+          <Experience />
+          <Projects />
+          <Skills />
+          <SoftSkills />
+          <Education />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
+    </LanguageProvider>
   );
 };
 

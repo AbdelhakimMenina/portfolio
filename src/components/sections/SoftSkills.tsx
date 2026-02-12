@@ -1,24 +1,21 @@
 import React from 'react';
 import SectionWrapper from '../ui/SectionWrapper';
+import { useLanguage } from '../../contexts/LanguageContext';
 
-interface SoftSkill {
-  name: string;
-  description?: string;
-}
-
-// Données des soft skills
-const softSkills: SoftSkill[] = [
-  { name: 'Communication', description: 'Échange efficace avec les équipes' },
-  { name: 'Travail en équipe', description: 'Collaboration et synergie' },
-  { name: 'Adaptabilité', description: 'Flexibilité face aux changements' },
-  { name: 'Résolution de problèmes', description: 'Analyse et solutions innovantes' },
-  { name: 'Gestion de projet', description: 'Organisation et planification' },
-  { name: 'Leadership', description: 'Encadrement et motivation' },
-  { name: 'Curiosité', description: 'Veille technologique continue' },
-  { name: 'Autonomie', description: 'Capacité à travailler en indépendance' },
+// Données des soft skills avec clés de traduction
+const softSkills: Array<{ key: string }> = [
+  { key: 'communication' },
+  { key: 'teamwork' },
+  { key: 'adaptability' },
+  { key: 'problemSolving' },
+  { key: 'projectManagement' },
+  { key: 'leadership' },
+  { key: 'curiosity' },
+  { key: 'autonomy' },
 ];
 
 const SoftSkillsSection: React.FC = () => {
+  const { t } = useLanguage();
   return (
     <SectionWrapper
       id="soft-skills"
@@ -26,16 +23,16 @@ const SoftSkillsSection: React.FC = () => {
     >
       <div className="container mx-auto max-w-5xl">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-900 dark:text-gray-100">
-          Soft Skills
+          {t('softSkills.title')}
         </h2>
         <p className="text-center text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-          Compétences interpersonnelles et savoir-être qui complètent mon expertise technique.
+          {t('softSkills.description')}
         </p>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {softSkills.map((skill) => (
             <div
-              key={skill.name}
+              key={skill.key}
               className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-6 text-center hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300 transform hover:scale-105 border border-gray-200 dark:border-gray-600 hover:border-primary-300 dark:hover:border-primary-600 group"
             >
               <div className="mb-3">
@@ -46,13 +43,11 @@ const SoftSkillsSection: React.FC = () => {
                 </div>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">
-                {skill.name}
+                {t(`softSkill.${skill.key}.name`)}
               </h3>
-              {skill.description && (
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  {skill.description}
-                </p>
-              )}
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                {t(`softSkill.${skill.key}.desc`)}
+              </p>
             </div>
           ))}
         </div>

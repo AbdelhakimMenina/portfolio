@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDarkMode } from '../../hooks/useDarkMode';
 import { useActiveSection } from '../../hooks/useActiveSection';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 const Header: React.FC = () => {
   const { isDark, toggleDarkMode } = useDarkMode();
   const activeSection = useActiveSection();
+  const { language, setLanguage, t } = useLanguage();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Fermer le menu mobile lors du scroll ou du changement de section
@@ -31,14 +33,14 @@ const Header: React.FC = () => {
   };
 
   const navItems = [
-    { id: 'hero', label: 'Accueil' },
-    { id: 'about', label: 'À propos' },
-    { id: 'experience', label: 'Expérience' },
-    { id: 'projects', label: 'Projets' },
-    { id: 'skills', label: 'Compétences' },
-    { id: 'soft-skills', label: 'Soft Skills' },
-    { id: 'education', label: 'Formations' },
-    { id: 'contact', label: 'Contact' },
+    { id: 'hero', labelKey: 'nav.home' },
+    { id: 'about', labelKey: 'nav.about' },
+    { id: 'experience', labelKey: 'nav.experience' },
+    { id: 'projects', labelKey: 'nav.projects' },
+    { id: 'skills', labelKey: 'nav.skills' },
+    { id: 'soft-skills', labelKey: 'nav.softSkills' },
+    { id: 'education', labelKey: 'nav.education' },
+    { id: 'contact', labelKey: 'nav.contact' },
   ];
 
   return (
@@ -51,7 +53,7 @@ const Header: React.FC = () => {
             className="text-2xl font-bold text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
             aria-label="Aller à l'accueil"
           >
-            AM.
+            Abdelhakim MENINA
           </button>
 
           {/* Navigation Desktop */}
@@ -67,9 +69,9 @@ const Header: React.FC = () => {
                       ? 'text-primary-600 dark:text-primary-400'
                       : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400'
                   }`}
-                  aria-label={`Aller à la section ${item.label}`}
+                  aria-label={`Aller à la section ${t(item.labelKey)}`}
                 >
-                  {item.label}
+                  {t(item.labelKey)}
                   {isActive && (
                     <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary-600 dark:bg-primary-400 rounded-full"></span>
                   )}
@@ -78,8 +80,18 @@ const Header: React.FC = () => {
             })}
           </div>
 
-          {/* Actions (Dark Mode + Menu Burger) */}
-          <div className="flex items-center gap-4">
+          {/* Actions (Language + Dark Mode + Menu Burger) */}
+          <div className="flex items-center gap-3">
+            {/* Language Toggle */}
+            <button
+              onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
+              className="px-3 py-1.5 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors text-sm font-semibold text-gray-700 dark:text-gray-300"
+              aria-label={language === 'fr' ? 'Switch to English' : 'Passer en français'}
+              title={language === 'fr' ? 'Switch to English' : 'Passer en français'}
+            >
+              {language === 'fr' ? 'EN' : 'FR'}
+            </button>
+
             {/* Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}
@@ -133,7 +145,7 @@ const Header: React.FC = () => {
                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                     }`}
                   >
-                    {item.label}
+                    {t(item.labelKey)}
                   </button>
                 );
               })}

@@ -1,80 +1,166 @@
 import React, { useState, useEffect, useRef } from 'react';
-import type { Skill } from '../../types';
 import SectionWrapper from '../ui/SectionWrapper';
+import { useLanguage } from '../../contexts/LanguageContext';
 
-// Données des compétences avec niveaux et icônes
-interface SkillWithLevel extends Skill {
-  level: number; // 0-100
+// Données locales pour les compétences avec icônes
+interface SkillItem {
   icon: string;
+  name: string;
+  category: string;
 }
 
-const skillsData: SkillWithLevel[] = [
-  // Frontend
-  { name: 'React', category: 'frontend', level: 90, icon: '⚛️' },
-  { name: 'TypeScript', category: 'frontend', level: 85, icon: '📘' },
-  { name: 'JavaScript', category: 'frontend', level: 90, icon: '🟨' },
-  { name: 'TailwindCSS', category: 'frontend', level: 88, icon: '🎨' },
-  { name: 'HTML/CSS', category: 'frontend', level: 92, icon: '🌐' },
-  
-  // Backend
-  { name: 'Node.js', category: 'backend', level: 85, icon: '🟢' },
-  { name: 'NestJS', category: 'backend', level: 80, icon: '🪺' },
-  { name: 'Express', category: 'backend', level: 82, icon: '⚡' },
-  { name: 'Java', category: 'backend', level: 75, icon: '☕' },
-  { name: 'Python', category: 'backend', level: 78, icon: '🐍' },
-  { name: 'REST APIs', category: 'backend', level: 88, icon: '🔌' },
-  
-  // DevOps
-  { name: 'Docker', category: 'devops', level: 85, icon: '🐳' },
-  { name: 'GitLab CI/CD', category: 'devops', level: 82, icon: '🔄' },
-  { name: 'GitHub Actions', category: 'devops', level: 80, icon: '⚙️' },
-  { name: 'Linux', category: 'devops', level: 83, icon: '🐧' },
-  { name: 'AWS (EC2, S3)', category: 'devops', level: 75, icon: '☁️' },
-  
-  // Autres
-  { name: 'SQL (MySQL/PostgreSQL)', category: 'other', level: 80, icon: '🗄️' },
-  { name: 'Git', category: 'other', level: 88, icon: '📚' },
-  { name: 'Shell', category: 'other', level: 78, icon: '💻' },
-  { name: 'WordPress', category: 'other', level: 75, icon: '📝' },
+// Données alignées sur les catégories du CV
+const skillsData: SkillItem[] = [
+  // Langages de programmation
+  { name: 'C', category: 'languages', icon: '💻' },
+  { name: 'Python', category: 'languages', icon: '💻' },
+  { name: 'Java', category: 'languages', icon: '💻' },
+  { name: 'JavaScript', category: 'languages', icon: '📜' },
+  { name: 'TypeScript', category: 'languages', icon: '📜' },
+  { name: 'HTML', category: 'languages', icon: '🌐' },
+  { name: 'CSS', category: 'languages', icon: '🌐' },
+  { name: 'PHP', category: 'languages', icon: '💻' },
+  { name: 'Node.js', category: 'languages', icon: '⚙️' },
+  { name: 'Bash', category: 'languages', icon: '💻' },
+
+  // Gestion de projet
+  { name: 'GitLab', category: 'project', icon: '📂' },
+  { name: 'GitHub', category: 'project', icon: '📂' },
+  { name: 'Git', category: 'project', icon: '📋' },
+  { name: 'Jira', category: 'project', icon: '📋' },
+  { name: 'Trello', category: 'project', icon: '📋' },
+
+  // Outils DevOps
+  { name: 'GitLab CI/CD', category: 'devops-tools', icon: '🔄' },
+  { name: 'Docker', category: 'devops-tools', icon: '🐳' },
+
+  // Frameworks
+  { name: 'React.js', category: 'frameworks', icon: '⚛️' },
+  { name: 'Nest.js', category: 'frameworks', icon: '🪺' },
+  { name: 'Bootstrap', category: 'frameworks', icon: '🧱' },
+  { name: 'Express.js', category: 'frameworks', icon: '⚡' },
+  { name: 'Vue.js', category: 'frameworks', icon: '🟢' },
+  { name: 'Axios', category: 'frameworks', icon: '📡' },
+
+  // SGBD
+  { name: 'PostgreSQL', category: 'databases', icon: '🗄️' },
+  { name: 'MySQL', category: 'databases', icon: '🗄️' },
+  { name: 'MariaDB', category: 'databases', icon: '🗄️' },
+  { name: 'SQL', category: 'databases', icon: '📊' },
+
+  // Système & outils informatiques
+  { name: 'Linux', category: 'systems', icon: '🐧' },
+  { name: 'Windows', category: 'systems', icon: '🪟' },
+  { name: 'Apache', category: 'systems', icon: '🌐' },
+  { name: 'SSH', category: 'systems', icon: '🔐' },
+  { name: 'Excel', category: 'systems', icon: '📈' },
+  { name: 'SEO', category: 'systems', icon: '🔍' },
+  { name: 'Analytics', category: 'systems', icon: '📊' },
+
+  // Administration système et réseaux
+  { name: 'DNS', category: 'sysadmin', icon: '🌍' },
+  { name: 'DHCP', category: 'sysadmin', icon: '🔌' },
+  { name: 'LDAP', category: 'sysadmin', icon: '📁' },
+
+  // Logiciels d’automatisation de workflow
+  { name: 'n8n', category: 'automation', icon: '🤖' },
+
+  // CMS
+  { name: 'WordPress', category: 'cms', icon: '📝' },
+
+  // IA & Assistance au développement
+  { name: 'ChatGPT', category: 'ai-tools', icon: '🧠' },
+  { name: 'Cursor', category: 'ai-tools', icon: '✏️' },
+  { name: 'Banani', category: 'ai-tools', icon: '🚀' },
+
+  // Design & UI
+  { name: 'Figma', category: 'design', icon: '🎨' },
+  { name: 'Canva', category: 'design', icon: '🖼️' },
+
+  // Outils de Sécurité et Pentesting
+  { name: 'Wireshark', category: 'security', icon: '🔍' },
+  { name: 'Nmap', category: 'security', icon: '🔎' },
+  { name: 'iptables', category: 'security', icon: '🛡️' },
+  { name: 'Kali Linux', category: 'security', icon: '🐉' },
+
+  // Cloud
+  { name: 'AWS', category: 'cloud', icon: '☁️' },
+  { name: 'S3 Bucket', category: 'cloud', icon: '🪣' },
 ];
 
-const categoryLabels: Record<string, string> = {
-  frontend: 'Frontend',
-  backend: 'Backend',
-  devops: 'DevOps / Cloud',
-  other: 'Autres',
-};
+// Les labels de catégories seront traduits dynamiquement via useLanguage
 
-const categoryColors: Record<string, { bg: string; border: string; text: string; progress: string }> = {
-  frontend: {
+const categoryColors: Record<string, { bg: string; border: string; text: string }> = {
+  languages: {
     bg: 'bg-blue-50 dark:bg-blue-900/20',
     border: 'border-blue-200 dark:border-blue-800',
     text: 'text-blue-600 dark:text-blue-400',
-    progress: 'bg-blue-500 dark:bg-blue-400',
   },
-  backend: {
+  project: {
     bg: 'bg-green-50 dark:bg-green-900/20',
     border: 'border-green-200 dark:border-green-800',
     text: 'text-green-600 dark:text-green-400',
-    progress: 'bg-green-500 dark:bg-green-400',
   },
-  devops: {
+  'devops-tools': {
     bg: 'bg-purple-50 dark:bg-purple-900/20',
     border: 'border-purple-200 dark:border-purple-800',
     text: 'text-purple-600 dark:text-purple-400',
-    progress: 'bg-purple-500 dark:bg-purple-400',
   },
-  other: {
+  frameworks: {
+    bg: 'bg-indigo-50 dark:bg-indigo-900/20',
+    border: 'border-indigo-200 dark:border-indigo-800',
+    text: 'text-indigo-600 dark:text-indigo-400',
+  },
+  databases: {
+    bg: 'bg-emerald-50 dark:bg-emerald-900/20',
+    border: 'border-emerald-200 dark:border-emerald-800',
+    text: 'text-emerald-600 dark:text-emerald-400',
+  },
+  systems: {
+    bg: 'bg-slate-50 dark:bg-slate-900/20',
+    border: 'border-slate-200 dark:border-slate-800',
+    text: 'text-slate-700 dark:text-slate-300',
+  },
+  sysadmin: {
+    bg: 'bg-teal-50 dark:bg-teal-900/20',
+    border: 'border-teal-200 dark:border-teal-800',
+    text: 'text-teal-600 dark:text-teal-400',
+  },
+  automation: {
+    bg: 'bg-cyan-50 dark:bg-cyan-900/20',
+    border: 'border-cyan-200 dark:border-cyan-800',
+    text: 'text-cyan-600 dark:text-cyan-400',
+  },
+  cms: {
+    bg: 'bg-amber-50 dark:bg-amber-900/20',
+    border: 'border-amber-200 dark:border-amber-800',
+    text: 'text-amber-600 dark:text-amber-400',
+  },
+  'ai-tools': {
+    bg: 'bg-fuchsia-50 dark:bg-fuchsia-900/20',
+    border: 'border-fuchsia-200 dark:border-fuchsia-800',
+    text: 'text-fuchsia-600 dark:text-fuchsia-400',
+  },
+  design: {
+    bg: 'bg-rose-50 dark:bg-rose-900/20',
+    border: 'border-rose-200 dark:border-rose-800',
+    text: 'text-rose-600 dark:text-rose-400',
+  },
+  security: {
     bg: 'bg-orange-50 dark:bg-orange-900/20',
     border: 'border-orange-200 dark:border-orange-800',
     text: 'text-orange-600 dark:text-orange-400',
-    progress: 'bg-orange-500 dark:bg-orange-400',
+  },
+  cloud: {
+    bg: 'bg-sky-50 dark:bg-sky-900/20',
+    border: 'border-sky-200 dark:border-sky-800',
+    text: 'text-sky-600 dark:text-sky-400',
   },
 };
 
 const Skills: React.FC = () => {
+  const { t } = useLanguage();
   const [visibleSkills, setVisibleSkills] = useState<Set<string>>(new Set());
-  const [animatedLevels, setAnimatedLevels] = useState<Map<string, number>>(new Map());
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -82,30 +168,12 @@ const Skills: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Animer l'apparition des compétences
+            // Animer l'apparition des compétences (fade-in / slide)
             const skillElements = entry.target.querySelectorAll('[data-skill]');
             skillElements.forEach((el, index) => {
               setTimeout(() => {
                 const skillName = el.getAttribute('data-skill') || '';
                 setVisibleSkills((prev) => new Set([...prev, skillName]));
-                
-                // Animer la barre de progression
-                const skill = skillsData.find((s) => s.name === skillName);
-                if (skill) {
-                  let currentLevel = 0;
-                  const interval = setInterval(() => {
-                    currentLevel += 2;
-                    if (currentLevel >= skill.level) {
-                      currentLevel = skill.level;
-                      clearInterval(interval);
-                    }
-                    setAnimatedLevels((prev) => {
-                      const newMap = new Map(prev);
-                      newMap.set(skillName, currentLevel);
-                      return newMap;
-                    });
-                  }, 20);
-                }
               }, index * 100);
             });
           }
@@ -142,10 +210,10 @@ const Skills: React.FC = () => {
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-            Compétences & Outils
+            {t('skills.title')}
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Technologies et outils que je maîtrise pour créer des solutions modernes et performantes.
+            {t('skills.description')}
           </p>
         </div>
         
@@ -155,48 +223,51 @@ const Skills: React.FC = () => {
             return (
               <div
                 key={category}
-                className={`rounded-xl p-6 border-2 ${colors.bg} ${colors.border} transition-all duration-300 hover:shadow-xl`}
+                className={`rounded-2xl p-6 border-2 ${colors.bg} ${colors.border} transition-all duration-300 hover:shadow-xl hover:-translate-y-1`}
               >
                 <div className="flex items-center gap-3 mb-6">
                   <h3 className={`text-2xl font-bold ${colors.text}`}>
-                    {categoryLabels[category]}
+                    {t(`skills.category.${category}`)}
                   </h3>
-                  <div className={`h-1 flex-1 ${colors.progress} opacity-30 rounded-full`}></div>
+                  <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-400/40 to-transparent dark:via-gray-200/30" />
                 </div>
                 
-                <div className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {categorySkills.map((skill) => {
                     const isVisible = visibleSkills.has(skill.name);
-                    const currentLevel = animatedLevels.get(skill.name) || 0;
                     return (
                       <div
                         key={skill.name}
                         data-skill={skill.name}
-                        className={`transition-all duration-500 ${
+                        className={`group flex items-center gap-3 px-4 py-3 rounded-xl bg-white/70 dark:bg-gray-900/40 border border-gray-200/60 dark:border-gray-700/60 shadow-sm transition-all duration-500 ${
                           isVisible
-                            ? 'opacity-100 translate-x-0'
-                            : 'opacity-0 -translate-x-4'
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 translate-y-2'
                         }`}
                       >
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center gap-3">
-                            <span className="text-2xl">{skill.icon}</span>
-                            <span className="font-semibold text-gray-900 dark:text-gray-100">
-                              {skill.name}
-                            </span>
-                          </div>
-                          <span className={`text-sm font-bold ${colors.text}`}>
-                            {currentLevel}%
-                          </span>
+                        {/* Icône personnalisée */}
+                        <div
+                          className="w-9 h-9 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center overflow-hidden group-hover:border-primary-400 transition-colors duration-300"
+                          data-icon-slot={skill.name}
+                        >
+                          <img
+                            src={`${import.meta.env.BASE_URL}icons/${skill.name.toLowerCase().replace(/\s+/g, '-').replace(/\./g, '')}.svg`}
+                            alt={skill.name}
+                            className="w-7 h-7 object-contain"
+                            onError={(e) => {
+                              // Fallback si l'icône n'existe pas
+                              const target = e.target as HTMLImageElement;
+                              target.style.display = 'none';
+                              const parent = target.parentElement;
+                              if (parent) {
+                                parent.innerHTML = `<span class="text-[10px] font-medium text-gray-400 dark:text-gray-500 group-hover:text-primary-400">Icon</span>`;
+                              }
+                            }}
+                          />
                         </div>
-                        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
-                          <div
-                            className={`h-full rounded-full transition-all duration-500 ${colors.progress} relative overflow-hidden`}
-                            style={{ width: `${currentLevel}%` }}
-                          >
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
-                          </div>
-                        </div>
+                        <span className="font-semibold text-gray-900 dark:text-gray-100 text-sm sm:text-base">
+                          {skill.name}
+                        </span>
                       </div>
                     );
                   })}
