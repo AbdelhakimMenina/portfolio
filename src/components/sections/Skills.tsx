@@ -62,8 +62,6 @@ const skillsData: SkillItem[] = [
   { name: 'DHCP', category: 'sysadmin', icon: '🔌' },
   { name: 'LDAP', category: 'sysadmin', icon: '📁' },
 
-  // Logiciels d’automatisation de workflow
-  { name: 'n8n', category: 'automation', icon: '🤖' },
 
   // CMS
   { name: 'WordPress', category: 'cms', icon: '📝' },
@@ -125,11 +123,6 @@ const categoryColors: Record<string, { bg: string; border: string; text: string 
     bg: 'bg-teal-50 dark:bg-teal-900/20',
     border: 'border-teal-200 dark:border-teal-800',
     text: 'text-teal-600 dark:text-teal-400',
-  },
-  automation: {
-    bg: 'bg-cyan-50 dark:bg-cyan-900/20',
-    border: 'border-cyan-200 dark:border-cyan-800',
-    text: 'text-cyan-600 dark:text-cyan-400',
   },
   cms: {
     bg: 'bg-amber-50 dark:bg-amber-900/20',
