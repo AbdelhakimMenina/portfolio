@@ -72,13 +72,6 @@ const Hero: React.FC = () => {
               </h1>
             </div>
             
-            {/* Rôle */}
-            <div className={`mb-4 transition-all duration-1000 delay-200 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              <p className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-semibold text-gray-800 dark:text-gray-200">
-                {t('hero.role')}
-              </p>
-            </div>
-            
             {/* Description avec animation */}
             <div className={`mb-8 transition-all duration-1000 delay-400 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <p className="text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-400 leading-relaxed">

@@ -47,8 +47,8 @@ const experiences: Experience[] = [
     company: 'The ENERGY ACTION Project (ACT 4)',
     type: 'stage',
     location: 'Saint-Ouen-sur-Seine, France',
-    startDate: '06/2023',
-    endDate: '08/2023',
+    startDate: '06/2022',
+    endDate: '06/2023',
     description: [
       'Développement du site web EnAct en utilisant WordPress (Elementor)',
       'Développement et intégration dans un CMS (WordPress)',

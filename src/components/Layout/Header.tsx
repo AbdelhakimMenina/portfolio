@@ -53,7 +53,7 @@ const Header: React.FC = () => {
             className="text-2xl font-bold text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
             aria-label="Aller à l'accueil"
           >
-            Abdelhakim MENINA
+            Portfolio
           </button>
 
           {/* Navigation Desktop */}

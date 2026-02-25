@@ -26,20 +26,19 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Hero
     'hero.title': 'Abdelhakim MENINA',
-    'hero.role': 'Développeur Full Stack / Front-End / Back-End',
-    'hero.description': 'Récemment diplômé d\'un Master Informatique parcours Programmation, Sûreté et Sécurité. Disponible dès maintenant, je recherche un emploi en tant que développeur Full-Stack / Front-End / Back-End.',
+    'hero.description': 'Diplômé d\'un Master en Informatique, parcours Programmation, Sûreté et Sécurité. Compétences en développement web, DevOps, cloud, administration systèmes et réseaux, avec des bases en cybersécurité.',
     'hero.domain1': 'Développement Web',
     'hero.domain2': 'DevOps & Cloud',
     'hero.domain3': 'Sécurité Informatique',
-    'hero.domain4': 'CMS & WordPress',
+    'hero.domain4': 'Administration Systèmes & Réseaux',
     'hero.buttonProjects': 'Voir mes projets',
     'hero.buttonContact': 'Me contacter',
     
     // About
     'about.title': 'À propos',
-    'about.p1': 'Récemment diplômé d\'un Master Informatique parcours Programmation, Sûreté et Sécurité à l\'Université Sorbonne Paris Nord, mention Bien. Disponible dès maintenant, je recherche un emploi en tant que développeur Full-Stack / Front-End / Back-End.',
-    'about.p2': 'J\'ai acquis une solide expérience lors de mes stages en développement web, notamment dans la création de sites web avec WordPress, le développement full stack, et la mise en place d\'infrastructures cloud sur AWS. J\'ai également travaillé sur l\'intégration SEO, l\'analytics, et la sécurisation de serveurs web.',
-    'about.p3': 'Mon approche combine rigueur technique, attention aux détails et recherche constante d\'innovation. Je suis toujours prêt à relever de nouveaux défis et à contribuer à des projets passionnants.',
+    'about.p1': 'Diplômé d\'un Master en Informatique, parcours Programmation, Sûreté et Sécurité à l\'Université Sorbonne Paris Nord (mention Bien), j\'ai consolidé un profil technique à la croisée du développement logiciel, de l\'infrastructure et de la sécurité. Mon cursus m\'a donné des bases solides en cybersécurité ainsi qu\'une expérience en administration systèmes et réseaux, en complément du développement web, du DevOps et du cloud. Disponible immédiatement.',
+    'about.p2': 'J\'ai acquis une expérience concrète lors de mes stages en développement web : conception et réalisation de sites avec WordPress, développement full stack (front et back), déploiement d\'infrastructures cloud sur AWS, et mise en place de pipelines CI/CD. J\'ai également participé à l\'intégration SEO, à l\'analyse de données (analytics) et à la sécurisation de serveurs et d\'applications web. Ces missions m\'ont permis de toucher à l\'administration systèmes et réseaux et de mettre en pratique les fondamentaux de la cybersécurité en contexte professionnel.',
+    'about.p3': 'Mon approche repose sur la rigueur technique, le souci du détail et la recherche d\'amélioration continue. Je suis à l\'aise pour documenter, automatiser et faire évoluer des solutions existantes, tout en restant ouvert aux nouvelles technologies. Je suis prêt à relever de nouveaux défis et à m\'investir dans des projets exigeants et porteurs de sens.',
     'about.stackTitle': 'Stack principale',
     'about.stack1': 'Frontend : React.js, Vue.js, TypeScript, JavaScript, HTML, CSS',
     'about.stack2': 'Backend : Node.js, Nest.js, Express.js, Python, Java, C',
@@ -53,7 +52,7 @@ const translations: Record<Language, Record<string, string>> = {
     'about.expertise3': 'Cloud Computing (AWS)',
     'about.expertise4': 'Sécurité informatique',
     'about.expertise5': 'CMS & WordPress',
-    'about.expertise6': 'Développement Full Stack',
+    'about.expertise6': 'Administration systèmes & réseaux',
     
     // Experience
     'experience.title': 'Expérience professionnelle',
@@ -220,20 +219,19 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Hero
     'hero.title': 'Abdelhakim MENINA',
-    'hero.role': 'Full Stack / Front-End / Back-End Developer',
-    'hero.description': 'Recently graduated with a Master\'s degree in Computer Science, Programming, Safety and Security track. Available now, I am looking for a job as a Full-Stack / Front-End / Back-End developer.',
+    'hero.description': 'Master\'s degree in Computer Science, Programming, Safety and Security track. Skilled in web development, DevOps, cloud technologies, system and network administration, with foundations in cybersecurity.',
     'hero.domain1': 'Web Development',
     'hero.domain2': 'DevOps & Cloud',
     'hero.domain3': 'Cybersecurity',
-    'hero.domain4': 'CMS & WordPress',
+    'hero.domain4': 'System & Network Administration',
     'hero.buttonProjects': 'View my projects',
     'hero.buttonContact': 'Contact me',
     
     // About
     'about.title': 'About',
-    'about.p1': 'Recently graduated with a Master\'s degree in Computer Science, Programming, Safety and Security track at Sorbonne Paris Nord University, with Distinction. Available now, I am looking for a job as a Full-Stack / Front-End / Back-End developer.',
-    'about.p2': 'I have gained solid experience during my internships in web development, particularly in creating websites with WordPress, full stack development, and setting up cloud infrastructures on AWS. I have also worked on SEO integration, analytics, and web server security.',
-    'about.p3': 'My approach combines technical rigor, attention to detail and constant search for innovation. I am always ready to take on new challenges and contribute to exciting projects.',
+    'about.p1': 'I hold a Master\'s degree in Computer Science, Programming, Safety and Security track from Sorbonne Paris Nord University (with Distinction). My studies have built a technical profile at the intersection of software development, infrastructure, and security, with solid foundations in cybersecurity and hands-on experience in system and network administration, alongside web development, DevOps, and cloud. I am available immediately.',
+    'about.p2': 'I have gained hands-on experience during internships in web development: designing and building sites with WordPress, full stack development (front and back), deploying cloud infrastructures on AWS, and setting up CI/CD pipelines. I have also contributed to SEO integration, data analytics, and securing web servers and applications. These roles have allowed me to work on system and network administration and to apply cybersecurity fundamentals in a professional context.',
+    'about.p3': 'My approach is based on technical rigor, attention to detail, and continuous improvement. I am comfortable documenting, automating, and evolving existing solutions while staying open to new technologies. I am ready to take on new challenges and commit to demanding, meaningful projects.',
     'about.stackTitle': 'Main stack',
     'about.stack1': 'Frontend: React.js, Vue.js, TypeScript, JavaScript, HTML, CSS',
     'about.stack2': 'Backend: Node.js, Nest.js, Express.js, Python, Java, C',
@@ -247,7 +245,7 @@ const translations: Record<Language, Record<string, string>> = {
     'about.expertise3': 'Cloud Computing (AWS)',
     'about.expertise4': 'Cybersecurity',
     'about.expertise5': 'CMS & WordPress',
-    'about.expertise6': 'Full Stack Development',
+    'about.expertise6': 'System & Network Administration',
     
     // Experience
     'experience.title': 'Professional Experience',
